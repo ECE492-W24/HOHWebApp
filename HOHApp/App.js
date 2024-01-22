@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import TextDisplay from './components/TextDisplay.js';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Welcome to our Capstone Project!</Text>
+      <TextDisplay />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +14,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#D3F2FF',
     alignItems: 'center',
     justifyContent: 'center',
   },
