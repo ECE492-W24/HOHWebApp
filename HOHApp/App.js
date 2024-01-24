@@ -42,14 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#D3F2FF",
     gap: 7,
   },
-  status: {
-    backgroundColor: "#FF4C41",
-    height: 27,
-    width: 27,
-    borderRadius: 100,
-    marginLeft: "85%",
-    marginTop: "5%",
-  },
   buttonTextView: {
     flexDirection: "row",
     alignSelf: "center",
