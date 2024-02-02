@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import TextDisplay from "./components/TextDisplay.js";
 import StatusButton from "./components/StatusButton.js";
+
+
 export default function App() {
   const [textSize, setTextSize] = useState(25);
+  const [isConnected, setIsConnected] = useState(false);
+  const [text, setText] = useState('');
 
   const decreaseTextSize = () => {
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
@@ -16,10 +20,45 @@ export default function App() {
   const reconnect = () => {
     console.log("call the reconnect function.");
   };
+
+  useEffect(() => {
+    try {
+      const ws = new WebSocket('ws://172.20.10.11:2222');
+
+      ws.onopen = () => {
+        console.log('connected');
+        setIsConnected(true);
+      };
+  
+      ws.onclose = () => {
+        console.log('disconnected');
+        setIsConnected(false);
+      };
+  
+      ws.onerror = (e) => {
+        console.log('error:', e.message);
+      };
+  
+      ws.onmessage = (e) => {
+        console.log('message:', e.data);
+        setText((prevText) => prevText + message);
+      };
+  
+      return () => {
+        ws.close();
+      };
+
+    } catch (error) {
+      console.log("error:", error);
+    }
+    
+  }
+  , []);
+
   return (
     <View style={styles.container}>
       <StatusButton onPress={reconnect} />
-      <TextDisplay textSize={textSize} />
+      <TextDisplay textSize={textSize} text={text}/>
       <View style={styles.buttonTextView}>
         <TouchableOpacity style={styles.textButton} onPress={decreaseTextSize}>
           <Text style={styles.buttonText}>-</Text>
