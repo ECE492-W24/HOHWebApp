@@ -3,11 +3,11 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import TextDisplay from "./components/TextDisplay.js";
 import StatusButton from "./components/StatusButton.js";
 
-
 export default function App() {
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
   const [text, setText] = useState('');
+  const ws = new WebSocket('ws://172.20.10.11:2222');
 
   const decreaseTextSize = () => {
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
@@ -23,8 +23,6 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const ws = new WebSocket('ws://172.20.10.11:2222');
-
       ws.onopen = () => {
         console.log('connected');
         setIsConnected(true);
@@ -41,7 +39,7 @@ export default function App() {
   
       ws.onmessage = (e) => {
         console.log('message:', e.data);
-        setText((prevText) => prevText + message);
+        setText((prevText) => prevText + e.data);
       };
   
       return () => {
@@ -57,7 +55,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusButton onPress={reconnect} />
+      <StatusButton onPress={reconnect} isConnected={isConnected} />
       <TextDisplay textSize={textSize} text={text}/>
       <View style={styles.buttonTextView}>
         <TouchableOpacity style={styles.textButton} onPress={decreaseTextSize}>
