@@ -7,9 +7,9 @@ export default function TextDisplay(props) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={{ fontSize: textSize }}>
-          {text}
-        </Text>
+      <Text style={{ fontSize: textSize }}>
+        {text}
+      </Text>
       </ScrollView>
     </View>
   );

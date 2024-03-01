@@ -7,14 +7,14 @@ export default function App() {
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
   const [text, setText] = useState('');
-  const ws = new WebSocket('ws://172.20.10.11:2222');
+  const ws = new WebSocket('ws://192.168.0.196:2222');
 
   const decreaseTextSize = () => {
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
   };
 
   const increaseTextSize = () => {
-    setTextSize((prevSize) => Math.min(50, prevSize + 5));
+    setTextSize((prevSize) => Math.min(40, prevSize + 5));
   };
 
   const reconnect = () => {
@@ -39,7 +39,7 @@ export default function App() {
   
       ws.onmessage = (e) => {
         console.log('message:', e.data);
-        setText((prevText) => prevText + e.data);
+        setText((prevText) => prevText + ' ' + e.data);
       };
   
       return () => {
@@ -49,7 +49,7 @@ export default function App() {
     } catch (error) {
       console.log("error:", error);
     }
-    
+
   }
   , []);
 
