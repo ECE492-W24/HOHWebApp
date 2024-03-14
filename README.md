@@ -11,6 +11,7 @@ This will contain code for the Heart of Hearing Web app
 
 running on ios device commands:
 - open ios/front_end.xcodeproj (when you need to add your apple developer account)
+- brew install ios-deploy
 - npm start
 - npm run ios --device
 
