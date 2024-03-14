@@ -10,6 +10,7 @@ This will contain code for the Heart of Hearing Web app
 5. For running the app on android or a physical device refer back to https://reactnative.dev/docs/environment-setup
 
 running on ios device commands:
+- open ios/front_end.xcodeproj (when you need to add your apple developer account)
 - npm start
 - npm run ios --device
 
