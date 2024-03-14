@@ -7,7 +7,7 @@ export default function TextDisplay(props) {
     <View style={styles.container}>
       <ScrollView>
         <Text style={{ fontSize: textSize }}>
-          Welcome to our capstone project!
+          Welcome to our capstone project!!!
         </Text>
       </ScrollView>
     </View>

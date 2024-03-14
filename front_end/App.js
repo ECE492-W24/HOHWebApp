@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import TextDisplay from "./components/TextDisplay.js";
 import StatusButton from "./components/StatusButton.js";
-import {BleManager} from 'react-native-ble-plx';
+import { BleManager } from 'react-native-ble-plx';
+
+const bleManager = new BleManager();
 
 export default function App() {
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
   const [connectedDevice, setConnectedDevice] = useState();
-  const bleManager = new BleManager();
 
   const decreaseTextSize = () => {
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
@@ -23,17 +24,19 @@ export default function App() {
   };
 
   useEffect(() => {
+    console.log('in use effect');
     // Function to handle Bluetooth connection
-    const connectToBluetoothServer = async () => {
+    const connectToBluetoothServer = () => {
       try {
         // Scan for nearby Bluetooth devices
-        const devices = await bleManager.startDeviceScan(null, null, (error, device) => {
+        const devices = bleManager.startDeviceScan(null, null, (error, device) => {
           if (error) {
             console.log('Error scanning:', error);
             return;
           }
+          console.log('ugh');
           // Check if the device is your Raspberry Pi (you may need to adjust the condition)
-          if (device.name === 'Your Raspberry Pi Name') {
+          if (device.name === 'raspberrypi') {
             // Connect to the device
             bleManager.stopDeviceScan();
             device.connect().then((device) => {
@@ -42,7 +45,7 @@ export default function App() {
               // Discover services and characteristics
               device.discoverAllServicesAndCharacteristics().then((device) => {
                 // Subscribe to notifications for the characteristic (you may need to adjust the UUID)
-                device.monitorCharacteristicForService('Your Service UUID', 'Your Characteristic UUID', (error, characteristic) => {
+                device.monitorCharacteristicForService('A07498CA-AD5B-474E-940D-16F1FBE7E8CD', '51FF12BB-3ED8-46E5-B4F9-D64E2FEC021B', (error, characteristic) => {
                   if (error) {
                     console.log('Error monitoring characteristic:', error);
                     return;
@@ -59,6 +62,8 @@ export default function App() {
             });
           }
         });
+
+        console.log('Devices:', devices);
       } catch (error) {
         console.log('Error:', error);
       }
