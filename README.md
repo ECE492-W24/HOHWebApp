@@ -9,11 +9,12 @@ This will contain code for the Heart of Hearing Web app
 4. Open another terminal and run `npm run ios`
 5. For running the app on android or a physical device refer back to https://reactnative.dev/docs/environment-setup
 
-
-
+running on ios device commands:
+- npm start
+- npm run ios --device
 
 ---
-***Running the react native expo app [depricated, we are using the app in the front_end folder now]:***
+***Running the react native expo app:***
 
 1. Download the Expo Go app on your phone
 2. cd into  the HOHApp directory
