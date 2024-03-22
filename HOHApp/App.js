@@ -3,13 +3,13 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import TextDisplay from "./components/TextDisplay.js";
 import StatusButton from "./components/StatusButton.js";
 
-export default function App() {
+export default function App() { 
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
-  const [text, setText] = useState('Welcome to our capstone');
-  const ws = new WebSocket('ws://192.168.0.196:2222');
+  const [text, setText] = useState('');
+  const ws = new WebSocket('ws://172.31.40.102:2222');
 
-  const decreaseTextSize = () => {
+  const decreaseTextSize = () => { 
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
   };
 
