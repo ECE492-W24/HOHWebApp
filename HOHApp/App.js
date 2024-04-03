@@ -6,7 +6,7 @@ import StatusButton from "./components/StatusButton.js";
 export default function App() { 
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
-  const [text, setText] = useState('hello my name is francis and I am tall');
+  const [text, setText] = useState('');
   const ws = new WebSocket('ws://172.20.10.3:2222');
 
   const decreaseTextSize = () => { 
