@@ -6,8 +6,8 @@ import StatusButton from "./components/StatusButton.js";
 export default function App() { 
   const [textSize, setTextSize] = useState(25);
   const [isConnected, setIsConnected] = useState(false);
-  const [text, setText] = useState('');
-  const ws = new WebSocket('ws://172.31.40.102:2222');
+  const [text, setText] = useState('hello my name is francis and I am tall');
+  const ws = new WebSocket('ws://172.20.10.3:2222');
 
   const decreaseTextSize = () => { 
     setTextSize((prevSize) => Math.max(20, prevSize - 5));
@@ -27,19 +27,22 @@ export default function App() {
         console.log('connected');
         setIsConnected(true);
       };
-  
+
       ws.onclose = () => {
         console.log('disconnected');
         setIsConnected(false);
       };
-  
+
       ws.onerror = (e) => {
         console.log('error:', e.message);
       };
-  
+
       ws.onmessage = (e) => {
-        console.log('message:', e.data);
-        setText((prevText) => prevText + ' ' + e.data);
+        // console.log('message:', e.data);
+        const newData = e.data.trim();
+        if (newData) {
+          setText((prevText) => prevText + newData + '\n');
+      }
       };
   
       return () => {
