@@ -2,13 +2,14 @@ import React from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 
 export default function TextDisplay(props) {
-  const { textSize } = props;
+  const { textSize, text } = props;
+
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={{ fontSize: textSize }}>
-          Welcome to our capstone project!
-        </Text>
+      <Text style={{ fontSize: textSize }}>
+        {text}
+      </Text>
       </ScrollView>
     </View>
   );
